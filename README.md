@@ -43,8 +43,8 @@ Contributions are welcome! If you have any ideas for improvements or new feature
 - Akshat Bhatia
 - Karthik Jandhyala
 - Praneel Emani
-- Abhiram
-- Leher
+- Abhiram Ch
+- Leher Gulati
 
 ## Acknowledgments
 
