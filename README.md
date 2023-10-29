@@ -1,4 +1,4 @@
-# ZDL-PACTAPP
+# [ZDL-PACTAPP](https://zdl-pactapp.vercel.app/)
 
 ## Description
 
@@ -38,8 +38,8 @@ Contributions are welcome! If you have any ideas for improvements or new feature
 
 ## Authors
 
-- Sahanav Ramesh
 - Aniket Chakradeo
+- Sahanav Ramesh
 - Akshat Bhatia
 - Karthik Jandhyala
 - Praneel Emani
