@@ -1,4 +1,4 @@
-# [ZDL PACT runtime link](https://zdl-pactapp.vercel.app/)
+# [ZDL PACT runtime link](https://zdl-pact.vercel.app/)
 
 ## Description
 
