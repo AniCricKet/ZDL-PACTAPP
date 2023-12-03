@@ -84,25 +84,51 @@
             margin: 10px 0;
             font-size: 18px;
         }
-        
         .graph-container h2 {
             text-align: center;
             color: #007BFF; /* Dark blue section title color */
             margin: 20px 0;
         }
-        
         .canvas-container {
             margin-top: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-        
         /* Adjust the canvas size */
         canvas {
             width: 100%;
             height: 300px;
         }        
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            padding: 20px;
+            background-color: #fff;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -112,7 +138,9 @@
         </div>
         <h1>Carbon Emissions Calculator</h1>
         <form class="form" id="carbonCalculatorForm">
-            <label for="milesPerMonth">Miles Per Month:</label>
+            <label for="milesPerMonth">Miles Per Month:
+                <span class="question-mark" onclick="openHelpModal('miles')">&#63;</span>
+            </label>
             <input type="number" id="milesPerMonth" placeholder="Enter miles per month">
 
             <label for="carType">Car Type:</label>
@@ -126,7 +154,9 @@
             <label for="airTravelMiles">Air Travel Miles:</label>
             <input type="number" id="airTravelMiles" placeholder="Enter air travel miles">
 
-            <label for="homeEnergy">Home Energy (kWh):</label>
+            <label for="homeEnergy">Home Energy (kWh):
+                <span class="question-mark" onclick="openHelpModal('energy')">&#63;</span>
+            </label>
             <input type="number" id="homeEnergy" placeholder="Enter home energy consumption (kWh)">
         </form>
         <button id="calculateButton">Calculate</button>
@@ -306,6 +336,28 @@
             };
     
             localStorage.setItem('carbonChartData', JSON.stringify(dataToStore));
+        }
+        function openHelpModal(type) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+
+            const imageSrc = type === 'miles' ? 'miles_help_image.jpg' : 'energy_help_image.jpg';
+
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close" onclick="closeHelpModal()">&times;</span>
+                    <img src="${imageSrc}" alt="Help Image">
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+        }
+
+        function closeHelpModal() {
+            const modal = document.querySelector('.modal');
+            if (modal) {
+                modal.remove();
+            }
         }
     </script>
     
