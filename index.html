@@ -289,7 +289,7 @@
             degreeChangeElement.textContent = degreeChange;
     
             // Add data to the charts
-            addDataToCharts(temperatureChart, carbonEmissionsChart, degreeChange, carbonEmissions);
+            addDataToCharts(temperatureChart, carbonEmissionsChart, degreeChange*Math.pow(10,8), carbonEmissions);
     
             // Store data in local storage
             storeData(temperatureChart, carbonEmissionsChart);
@@ -297,26 +297,26 @@
     
         // Function to add data to the charts
         function addDataToCharts(temperatureChart, carbonEmissionsChart, temperatureChange, carbonEmissions) {
-            const time = new Date().toLocaleString();
-    
+            const time = new Date().toLocaleTimeString();
+
             // Add data points to the charts
             temperatureChart.data.labels.push(time);
             temperatureChart.data.datasets[0].data.push(temperatureChange);
-    
+
             carbonEmissionsChart.data.labels.push(time);
             carbonEmissionsChart.data.datasets[0].data.push(carbonEmissions);
-    
+
             // Limit the number of data points displayed (e.g., display the last 10 data points)
-            if (temperatureChart.data.labels.length > 10) {
+            if (temperatureChart.data.labels.length > 100) {
                 temperatureChart.data.labels.shift();
                 temperatureChart.data.datasets[0].data.shift();
             }
-    
-            if (carbonEmissionsChart.data.labels.length > 10) {
+
+            if (carbonEmissionsChart.data.labels.length > 100) {
                 carbonEmissionsChart.data.labels.shift();
                 carbonEmissionsChart.data.datasets[0].data.shift();
             }
-    
+
             // Update charts
             temperatureChart.update();
             carbonEmissionsChart.update();
