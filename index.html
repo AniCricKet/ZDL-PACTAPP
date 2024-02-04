@@ -134,22 +134,24 @@
 <body>
     <div class="container">
         <div class="logo">
+            <h2 style="text-align: center; font-size: 18px; color: #007BFF;">Del Norte High School</h2>
             <img src="/img/zdl-logo.jpg" alt="Zero Degree Lab Logo" width="300" height="300">
         </div>
         <h1>Carbon Emissions Calculator</h1>
         <form class="form" id="carbonCalculatorForm">
-            <label for="milesPerMonth">Miles Per Month:
-                <span class="question-mark" onclick="openHelpModal('miles')">&#63;</span>
-            </label>
-            <input type="number" id="milesPerMonth" placeholder="Enter miles per month">
-
             <label for="carType">Car Type:</label>
-            <select id="carType">
-                <option value="small">Small (e.g., Sedan)</option>
-                <option value="medium">Medium (e.g., SUV)</option>
-                <option value="large">Large (e.g., Pickup Truck)</option>
-                <option value="hybrid">Hybrid (e.g., Toyota Prius)</option>
-            </select>
+    <select id="carType">
+        <option value="small">Small (e.g., Sedan)</option>
+        <option value="medium">Medium (e.g., SUV)</option>
+        <option value="large">Large (e.g., Pickup Truck)</option>
+        <option value="hybrid">Hybrid (e.g., Toyota Prius)</option>
+    </select>
+
+    <label for="milesPerMonth">Car Miles Per Month: 
+        <span class="question-mark" onclick="openHelpModal('miles')">&#63;</span>
+    </label>
+    <input type="number" id="milesPerMonth" placeholder="Enter miles per month">
+
 
             <label for="airTravelMiles">Air Travel Miles:</label>
             <input type="number" id="airTravelMiles" placeholder="Enter air travel miles">
@@ -175,6 +177,13 @@
         <div class="graph-container">
             <h2>Change in Carbon Emissions vs Time</h2>
             <canvas id="carbonEmissionsChart" width="400" height="200"></canvas>
+        </div>
+
+        <div class="percentage-decrease">
+            <label for="percentageDecrease">Percentage Decrease Goal:</label>
+            <input type="number" id="percentageDecrease" placeholder="Enter how much you want to decrease by (as a percentage)">
+        
+            <button id="articleLinkButton" onclick="redirectToArticle()">Learn How to Decrease Your Carbon Footprint</button>
         </div>
     </div>
 
@@ -359,6 +368,22 @@
                 modal.remove();
             }
         }
+        function redirectToArticle() {
+            const percentageDecrease = parseFloat(document.getElementById('percentageDecrease').value);
+    
+            if (isNaN(percentageDecrease) || percentageDecrease < 0) {
+                alert("Please enter a valid percentage.");
+                return;
+            }
+    
+            // Replace the link below with the actual link to your article.
+            const articleLink = 'https://zdldnhs.wixsite.com/pact/team-1';
+            
+            // Open the article link in a new tab.
+            window.open(articleLink, '_blank');
+        }
+    
+    
     </script>
     
 </body>
