@@ -382,18 +382,27 @@
         function openHelpModal(type) {
             const modal = document.createElement('div');
             modal.className = 'modal';
-
-            const imageSrc = type === 'miles' ? 'miles_help_image.jpg' : 'energy_help_image.jpg';
-
+        
+            let imageSrc, title;
+            if (type === 'miles') {
+                imageSrc = 'miles_help_image.jpg';
+                title = 'Average Car Miles Per Month by Age';
+            } else if (type === 'energy') {
+                imageSrc = 'readsdge.jpg'; // Change this to the actual name of your home energy help image
+                title = 'How to Read Your SDGE Bill';
+            }
+        
             modal.innerHTML = `
                 <div class="modal-content">
                     <span class="close" onclick="closeHelpModal()">&times;</span>
-                    <img src="${imageSrc}" alt="Help Image">
+                    <h3>${title}</h3>
+                    <img src="${imageSrc}" alt="Help Image" style="max-width: 100%; max-height: 80vh; display: block; margin: 0 auto;">
                 </div>
             `;
-
+        
             document.body.appendChild(modal);
         }
+        
 
         function closeHelpModal() {
             const modal = document.querySelector('.modal');
