@@ -147,6 +147,14 @@
             background-color: #0056b3; /* Darker blue on hover */
             color: #fff; /* Text color on hover */
         }
+        .punny-sentence-container {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -191,7 +199,9 @@
             <p>Carbon Emissions: <span id="carbonEmissions">--</span> KG</p>
             <p>Degree Change: <span id="degreeChange">--</span> Â°F</p>
         </div>
-
+        <div class="punny-sentence-container" id="punnySentenceContainer">
+            <p id="punnySentence"></p>
+    </div>
         <!-- Graphs for Change in Temperature vs Time and Change in Carbon Emissions vs Time -->
         <div class="graph-container">
             <h2>Change in Temperature vs Time</h2>
@@ -209,7 +219,6 @@
         
             <button id="articleLinkButton" onclick="redirectToArticle()">Learn How to Decrease Your Carbon Footprint</button>
         </div>
-    </div>
 
     <script>
                     class Calculations
@@ -406,8 +415,30 @@
             // Open the article link in a new tab.
             window.open(articleLink, '_blank');
         }
-    
-    
+        
+        const punnySentences = [
+            "Don't be a fossil fool! 🦕",
+            "Be-leaf in a cleaner planet! 🌿",
+            "I watts you to know, together we can illuminate a brighter, energy-efficient future! 💡",
+            "Take small steps to leave a big impact 👣",
+            "Small carbon footprint = big impact 👣🌎",
+            "Think green and keep our planet clean! 🌿",
+            "Eco-friendly driving is wheely important! 🚗",
+            "Switch to LEDs... it's a bright idea for a sustainable tomorrow! 💡",
+            "Why did the eco-friendly person bring a ladder? To reduce their carbon footprint step by step! 🌿👣",
+            "Fuel your day with positivity, not carbon emissions! ⛽😊",
+            "Reduce your carbon footprint, not your enthusiasm! 💪",
+];
+
+
+        function displayRandomPunnySentence() {
+            const punnySentenceContainer = document.getElementById('punnySentence');
+            const randomIndex = Math.floor(Math.random() * punnySentences.length);
+            punnySentenceContainer.textContent = punnySentences[randomIndex];
+        }
+        addDataToCharts(temperatureChart, carbonEmissionsChart, degreeChange * Math.pow(10, 8), carbonEmissions);
+        displayRandomPunnySentence();
+
     </script>
     
 </body>
