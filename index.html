@@ -155,6 +155,25 @@
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
+        .footer {
+            background-color: #7cc8ee;
+            padding: 10px;
+            text-align: center; /* Center-align the text */
+        }
+        
+        .footer p {
+            margin: 0; /* Remove default paragraph margin to ensure centered text */
+        }
+        
+        .footer a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            color: #fff;
+        }
+        
     </style>
 </head>
 <body>
@@ -388,7 +407,7 @@
                 imageSrc = 'miles_help_image.jpg';
                 title = 'Average Car Miles Per Month by Age';
             } else if (type === 'energy') {
-                imageSrc = 'readsdge.jpg'; // Change this to the actual name of your home energy help image
+                imageSrc = '/img/readsdge.jpg';
                 title = 'How to Read Your SDGE Bill';
             }
         
@@ -449,6 +468,10 @@
         displayRandomPunnySentence();
 
     </script>
+
+    <div class="footer">
+        <p> Follow us on <a href="https://www.instagram.com/dnhs_zdl/">Instagram</a> to keep track of our team's progress!</p>
+    </div>
     
 </body>
 </html>
