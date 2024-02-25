@@ -2,51 +2,93 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #2fb5e1;
+            color: #fff;
         }
+
         .navbar {
-            background-color: #7cc8ee; /* Adjust the color to match your theme */
+            background-color: #7cc8ee;
             overflow: hidden;
         }
 
         .navbar a {
             float: left;
             display: block;
-            color: #007BFF; /* Dark blue text color for links */
+            color: #007BFF;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
         }
 
         .navbar a:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-            color: #fff; /* Text color on hover */
+            background-color: #0056b3;
+            color: #fff;
         }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #2378d3; /* Dark blue text color for the content */
+            padding: 20px; /* Add some padding to improve readability */
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
         .footer {
             background-color: #7cc8ee;
-            padding: 10px;
-            text-align: center; /* Center-align the text */
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            margin-top: 20px;
         }
-        
-        .footer p {
-            margin: 0; /* Remove default paragraph margin to ensure centered text */
-        }
-        
+
         .footer a {
             color: #007BFF;
             text-decoration: none;
         }
-        
+
         .footer a:hover {
             color: #fff;
         }
-        
+
+        .team-section {
+            margin-top: 20px;
+        }
+
+        .team-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .team-table th,
+        .team-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .team-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
@@ -56,11 +98,14 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="animations.html">Climate Change Animations</a>
-        <a href="https://github.com/AniCricKet/ZDL-PACTAPP">View on Github</a>
+        <a href="https://github.com/AniCricKet/ZDL-PACTAPP" target="_blank" rel="noopener noreferrer">View on Github</a>
     </div>
 
     <!-- About Section -->
     <div class="container">
+        <div class="logo">
+            <img src="/img/heirarchy.png" alt="ZDL Heirarchy" width="100%">
+        </div>
         <h1>About Zero Degree Del Norte</h1>
         <p>At Zero Degree Del Norte, our mission is to contribute to the reduction of global temperature rise. We have developed the PACT app, a powerful tool designed to track individuals' greenhouse gas footprint and raise awareness about environmental impact.</p>
 
@@ -72,15 +117,83 @@
             <li>Assessment of the impact on children's health</li>
             <li>Goal-setting functionality to help users reduce their carbon footprint</li>
         </ul>
-
-        <p>Join us in the journey towards a greener, healthier planet. Download the PACT app and start making a positive impact today!</p>
     </div>
 
+    <!-- Meet the Team Section -->
+    <div class="container team-section">
+        <h2>Meet the Team</h2>
+        <table class="team-table">
+            <tr>
+                <th>Leaders</th>
+                <th>Software</th>
+                <th>Business</th>
+            </tr>
+            <tr>
+                <td>
+                    <img src="/img/leader1.jpg" alt="Arushi Bharadwaj" class="team-image"><br>
+                    Arushi Bharadwaj
+                </td>
+                <td>
+                    <img src="/img/aniket.jpeg" alt="Aniket Chakradeo" class="team-image"><br>
+                    Aniket Chakradeo
+                </td>
+                <td>
+                    <img src="/img/isha.jpeg" alt="Isha Popat" class="team-image"><br>
+                    Isha Popat
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="/img/hema.jpeg" alt="Hema Rajendran" class="team-image"><br>
+                    Hema Rajendran
+                </td>
+                <td>
+                    <img src="/img/software2.jpg" alt="Sahanav Ramesh" class="team-image"><br>
+                    Sahanav Ramesh
+                </td>
+                <td>
+                    <img src="/img/aruship.jpeg" alt="Arushi Pandey" class="team-image"><br>
+                    Arushi Pandey
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="/img/leader3.jpg" alt="Shravani Prem" class="team-image"><br>
+                    Shravani Prem
+                </td>
+                <td>
+                    <img src="/img/akshat.jpeg" alt="Akshat Bhatia" class="team-image"><br>
+                    Akshat Bhatia
+                </td>
+                <td>
+                    <img src="/img/aditib.jpeg" alt="Aditi Bharadwaj" class="team-image"><br>
+                    Aditi Bharadwaj
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><img src="/img/samita.jpeg" alt="Samita Senthilkumar" class="team-image"><br>
+                    Samita Senthilkumar</td>
+                <td>
+                    <img src="/img/aditih.jpeg" alt="Aditi Hariharan" class="team-image"><br>
+                    Aditi Hariharan
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td>
+                    <img src="/img/harish.jpeg" alt="Harish Sarvanakumar" class="team-image"><br>
+                    Harish Sarvanakumar
+                </td>
+            </tr>
+        </table>
+    </div>
 
+    <!-- Footer -->
+    <div class="footer">
+        <h3>Join the Movement: Be a Climate Changemaker As A High Schooler Today!</h3>
+        <p>Follow us on <a href="https://www.instagram.com/dnhs_zdl/" target="_blank" rel="noopener noreferrer">Instagram</a> to keep track of our team's progress!</p>
+    </div>
 </body>
-
-<div class="footer">
-    <p>&copy; Follow us on <a href="https://www.instagram.com/dnhs_zdl/">Instagram</a> to keep track of our team's progress!</p>
-</div>
 
 </html>
