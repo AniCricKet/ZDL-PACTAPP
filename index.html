@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carbon Emissions Calculator</title>
+    <title>Greenhouse Gas Emissions Calculator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -131,22 +131,22 @@
         }
         .navbar {
             background-color: #7cc8ee; /* Adjust the color to match your theme */
-            overflow: hidden;
+            text-align: center; /* Center the links horizontally */
         }
-
+        
         .navbar a {
-            float: left;
-            display: block;
+            display: inline-block; /* Display links as inline-block for centering */
             color: #007BFF; /* Dark blue text color for links */
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
         }
-
+        
         .navbar a:hover {
             background-color: #0056b3; /* Darker blue on hover */
             color: #fff; /* Text color on hover */
         }
+        
         .punny-sentence-container {
             text-align: center;
             margin-top: 20px;
@@ -188,7 +188,7 @@
             <h2 style="text-align: center; font-size: 18px; color: #007BFF;">Del Norte High School</h2>
             <img src="/img/zdl-logo.jpg" alt="Zero Degree Lab Logo" width="300" height="300">
         </div>
-        <h1>Carbon Emissions Calculator</h1>
+        <h1>Greenhouse Gas Emissions Calculator</h1>
         <p>Welcome to the official website of Del Norte High School's Zero Degree Lab! We are a group of high school students determined to do our part in stopping climate change. We believe that everyone has the potential to be a force for change in our environment. Over the last few years, we’ve partnered with Stanford’s Zero Degree Collaboratory to create an app that helps track their impact on the environment, and motivate them to decrease their carbon footprint. </p>
         <form class="form" id="carbonCalculatorForm">
             <label for="carType">Car Type:</label>
@@ -229,7 +229,7 @@
         </div>
 
         <div class="graph-container">
-            <h2>Change in Carbon Emissions vs Time</h2>
+            <h2>Change in Greenhouse Gas Emissions vs Time</h2>
             <canvas id="carbonEmissionsChart" width="400" height="200"></canvas>
         </div>
 
@@ -237,7 +237,7 @@
             <label for="percentageDecrease">Percentage Decrease Goal:</label>
             <input type="number" id="percentageDecrease" placeholder="Enter how much you want to decrease by (as a percentage)">
         
-            <button id="articleLinkButton" onclick="redirectToArticle()">Learn How to Decrease Your Carbon Footprint</button>
+            <button id="articleLinkButton" onclick="redirectToArticle()">Learn How to Decrease Your Greenhouse Gas Footprint</button>
         </div>
 
     <script>
@@ -455,7 +455,7 @@
             "Eco-friendly driving is wheely important! 🚗",
             "Switch to LEDs... it's a bright idea for a sustainable tomorrow! 💡",
             "Why did the eco-friendly person bring a ladder? To reduce their carbon footprint step by step! 🌿👣",
-            "Fuel your day with positivity, not carbon emissions! ⛽😊",
+            "Fuel your day with positivity, not greenhouse gas emissions! ⛽😊",
             "Reduce your carbon footprint, not your enthusiasm! 💪",
 ];
 
