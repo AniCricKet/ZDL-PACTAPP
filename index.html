@@ -205,8 +205,12 @@
     <input type="number" id="milesPerMonth" placeholder="Enter miles per month">
 
 
-            <label for="airTravelMiles">Air Travel Miles:</label>
-            <input type="number" id="airTravelMiles" placeholder="Enter air travel miles">
+    <label for="airTravelMiles">
+        Air Travel Miles:
+        <span class="question-mark" onclick="openHelpModal('airTravel')">&#63;</span>
+    </label>
+    <input type="number" id="airTravelMiles" placeholder="Enter air travel miles">
+    
 
             <label for="homeEnergy">Home Energy (kWh):
                 <span class="question-mark" onclick="openHelpModal('energy')">&#63;</span>
@@ -402,26 +406,34 @@
         function openHelpModal(type) {
             const modal = document.createElement('div');
             modal.className = 'modal';
-        
+            
             let imageSrc, title;
+            
             if (type === 'miles') {
                 imageSrc = 'miles_help_image.jpg';
                 title = 'Average Car Miles Per Month by Age';
             } else if (type === 'energy') {
                 imageSrc = '/img/readsdge.jpg';
                 title = 'How to Read Your SDGE Bill';
+            } else if (type === 'airTravel') {
+                imageSrc = 'https://www.mapdevelopers.com/mileage_calculator.php';
+                title = 'Air Travel Miles Calculator';
+            } else {
+                alert('Invalid help type');
+                return;
             }
-        
+            
             modal.innerHTML = `
                 <div class="modal-content">
                     <span class="close" onclick="closeHelpModal()">&times;</span>
                     <h3>${title}</h3>
-                    <img src="${imageSrc}" alt="Help Image" style="max-width: 100%; max-height: 80vh; display: block; margin: 0 auto;">
+                    ${type === 'airTravel' ? `<iframe src="${imageSrc}" style="width:100%; height: 80vh; border: none;"></iframe>` : `<img src="${imageSrc}" alt="Help Image" style="max-width: 100%; max-height: 80vh; display: block; margin: 0 auto;">`}
                 </div>
             `;
-        
+            
             document.body.appendChild(modal);
         }
+        
         
 
         function closeHelpModal() {
@@ -467,7 +479,6 @@
         }
         addDataToCharts(temperatureChart, carbonEmissionsChart, degreeChange * Math.pow(10, 8), carbonEmissions);
         displayRandomPunnySentence();
-
     </script>
 
     <div class="footer">
