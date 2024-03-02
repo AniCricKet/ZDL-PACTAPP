@@ -42,6 +42,10 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             color: #2378d3; /* Dark blue text color for the content */
             padding: 20px; /* Add some padding to improve readability */
+            text-align: center;
+        }
+        .uncentered-text {
+            text-align: left; /* Adjust the text alignment for the specific elements you want left-aligned */
         }
 
         .logo img {
@@ -96,7 +100,21 @@
         .team-section h2 {
             color: #007BFF; /* Set the header color to dark blue */
         }
-        
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Green color, you can change it */
+            color: #fff; /* Text color */
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover effect for the button */
+        .cta-button:hover {
+            background-color: #45a049; /* Darker green color on hover, you can change it */
+        }
     </style>
 </head>
 
@@ -105,8 +123,9 @@
     <div class="navbar">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
+        <a href="health.html">Health Report</a>
         <a href="animations.html">Climate Change Animations</a>
-        <a href="https://github.com/AniCricKet/ZDL-PACTAPP" target="_blank" rel="noopener noreferrer">View on Github</a>
+        <a href="https://github.com/AniCricKet/ZDL-PACTAPP">View on Github</a>
     </div>
 
     <!-- About Section -->
@@ -119,14 +138,16 @@
 
         <p>The PACT app goes beyond simple calculations. It not only estimates user emissions but also evaluates the potential impact on children's health, emphasizing the urgency of taking steps towards a sustainable future. Our app empowers users by providing insights into their carbon footprint and encourages environmentally conscious decision-making.</p>
 
-        <p>Key Features of the PACT App:</p>
-        <ul>
+        <h2>Key Features of the PACT App:</h2>
+        <ul class="uncentered-text">
             <li>Accurate calculation of user emissions</li>
             <li>Assessment of the impact on children's health</li>
             <li>Goal-setting functionality to help users reduce their carbon footprint</li>
         </ul>
+        <h1>PACT</h1>
+        <p>PACT stands for Personal Action Against Climate Temperature! This simple app calculates your INDIVIDUAL greenhouse gas emissions and also tells you how much you have contributed to climate temperature increase. Based off that score, it then gives you suggestions to reduce it. The whole calculation only takes a few minutes so don't wait and start now...</p>
+        <a href="https://zdl-pact.vercel.app/" class="cta-button">Get Started</a>
     </div>
-
     <!-- Meet the Team Section -->
     <div class="container team-section">
         <h2>Meet our Team: </h2>
