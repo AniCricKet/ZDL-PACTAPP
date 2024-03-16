@@ -4,19 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Greenhouse Gas Emissions Calculator</title>
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+    		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1><a href="index.html">Zero Degree Lab</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="generic.html">Generic</a></li>
+											<li><a href="elements.html">Elements</a></li>
+											<li><a href="calculator.html">Calculator</a></li>
+											<li><a href="about.html">About</a></li>
+											<li><a href="health.html">Health Report</a></li>
+											<li><a href="animations.html">Climate Change Animations</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #2fb5e1;
+            <!-- background-color: #2fb5e1; -->
         }
         
         .container {
-            max-width: 800px;
+            <!-- max-width: 800px; -->
             margin: 0 auto;
             padding: 20px;
-            background-color: #7cc8ee;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
@@ -32,7 +60,7 @@
 
         h1 {
             text-align: center;
-            color: #007BFF; /* Dark blue title color */
+            <!-- color: #007BFF; /* Dark blue title color */ -->
             margin-bottom: 20px;
         }
         
@@ -129,23 +157,6 @@
             right: 10px;
             cursor: pointer;
         }
-        .navbar {
-            background-color: #7cc8ee; /* Adjust the color to match your theme */
-            text-align: center; /* Center the links horizontally */
-        }
-        
-        .navbar a {
-            display: inline-block; /* Display links as inline-block for centering */
-            color: #007BFF; /* Dark blue text color for links */
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        
-        .navbar a:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-            color: #fff; /* Text color on hover */
-        }
         
         .punny-sentence-container {
             text-align: center;
@@ -155,35 +166,10 @@
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
-        .footer {
-            background-color: #7cc8ee;
-            padding: 10px;
-            text-align: center; /* Center-align the text */
-        }
-        
-        .footer p {
-            margin: 0; /* Remove default paragraph margin to ensure centered text */
-        }
-        
-        .footer a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-        
-        .footer a:hover {
-            color: #fff;
-        }
         
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="health.html">Health Report</a>
-        <a href="animations.html">Climate Change Animations</a>
-        <a href="https://github.com/AniCricKet/ZDL-PACTAPP">View on Github</a>
-    </div>
     <div class="container">
         <div class="logo">
             <h2 style="text-align: center; font-size: 18px; color: #007BFF;">Del Norte High School</h2>
@@ -482,10 +468,22 @@
         displayRandomPunnySentence();
     </script>
 
-    <div class="footer">
+    <footer id="footer">
         <h3>Join the Movement: Be a Climate Changemaker As A High Schoolers Today!</h3>
         <p> Follow us on <a href="https://www.instagram.com/dnhs_zdl/">Instagram</a> to keep track of our team's progress!</p>
-    </div>
+        <ul class="icons">
+            <li><a href="https://www.instagram.com/dnhs_zdl/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+        </ul>
+    </footer>
+
+    		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
     
 </body>
 </html>
