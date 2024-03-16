@@ -1,47 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Zero Degree Lab</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="landing is-preload">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1><a href="index.html">Zero Degree Lab</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="generic.html">Generic</a></li>
+											<li><a href="elements.html">Elements</a></li>
+											<li><a href="calculator.html">Calculator</a></li>
+											<li><a href="about.html">About</a></li>
+											<li><a href="health.html">Health Report</a></li>
+											<li><a href="animations.html">Climate Change Animations</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+                				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+							<h2>About Us</h2>
+							<p>Meet our Team</p>
+                            <a class="more scrolly">Learn More</a>
+						</div>
+					</section>
+
 
     <style>
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #2fb5e1;
+            <!-- background-color: #2fb5e1; -->
             color: #fff;
-        }
-
-        .navbar {
-            background-color: #7cc8ee; /* Adjust the color to match your theme */
-            text-align: center; /* Center the links horizontally */
-        }
-        
-        .navbar a {
-            display: inline-block; /* Display links as inline-block for centering */
-            color: #007BFF; /* Dark blue text color for links */
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        
-        .navbar a:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-            color: #fff; /* Text color on hover */
-        }        
+        }   
 
         .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: #2378d3; /* Dark blue text color for the content */
-            padding: 20px; /* Add some padding to improve readability */
             text-align: center;
         }
         .uncentered-text {
@@ -51,23 +68,6 @@
         .logo img {
             max-width: 100%;
             height: auto;
-        }
-
-        .footer {
-            background-color: #7cc8ee;
-            padding: 20px;
-            text-align: center;
-            color: #fff;
-            margin-top: 20px;
-        }
-
-        .footer a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: #fff;
         }
 
         .team-section {
@@ -114,26 +114,23 @@
         /* Hover effect for the button */
         .cta-button:hover {
             background-color: #45a049; /* Darker green color on hover, you can change it */
-        }
+        } 
+    
     </style>
 </head>
 
 <body>
-    <!-- Navbar -->
-    <div class="navbar">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="health.html">Health Report</a>
-        <a href="animations.html">Climate Change Animations</a>
-        <a href="https://github.com/AniCricKet/ZDL-PACTAPP">View on Github</a>
-    </div>
 
     <!-- About Section -->
     <div class="container">
-        <div class="logo">
-            <img src="/img/app_images/heirarchy.png" alt="ZDL Heirarchy" width="100%">
-        </div>
+        <section class="wrapper style2">
+            <div class="inner">
+            <div class="logo">
+                    <img src="/img/app_images/heirarchy.png" alt="ZDL Heirarchy" width="50%">
+                </div>
+        
         <h1>About Zero Degree Del Norte</h1>
+
         <p>At Zero Degree Del Norte, our mission is to contribute to the reduction of global temperature rise. We have developed the PACT app, a powerful tool designed to track individuals' greenhouse gas footprint and raise awareness about environmental impact.</p>
 
         <p>The PACT app goes beyond simple calculations. It not only estimates user emissions but also evaluates the potential impact on children's health, emphasizing the urgency of taking steps towards a sustainable future. Our app empowers users by providing insights into their carbon footprint and encourages environmentally conscious decision-making.</p>
@@ -148,9 +145,12 @@
         <p>PACT stands for Personal Action Against Climate Temperature! This simple app calculates your INDIVIDUAL greenhouse gas emissions and also tells you how much you have contributed to climate temperature increase. Based off that score, it then gives you suggestions to reduce it. The whole calculation only takes a few minutes so don't wait and start now...</p>
         <a href="https://zdl-pact.vercel.app/" class="cta-button">Get Started</a>
     </div>
+</section>
+
+    </div>
     <!-- Meet the Team Section -->
     <div class="container team-section">
-        <h2>Meet our Team: </h2>
+        <h2 class ="wrapper style1 special">Meet our Team: </h2>
         <table class="team-table">
             <tr>
                 <th>Leaders</th>
@@ -226,10 +226,24 @@
     </div>
 
     <!-- Footer -->
-    <div class="footer">
-        <h3>Join the Movement: Be a Climate Changemaker As A High Schooler Today!</h3>
-        <p>Follow us on <a href="https://www.instagram.com/dnhs_zdl/" target="_blank" rel="noopener noreferrer">Instagram</a> to keep track of our team's progress!</p>
-    </div>
+    <footer id="footer">
+        <h3>Join the Movement: Be a Climate Changemaker As A High Schoolers Today!</h3>
+        <p> Follow us on <a href="https://www.instagram.com/dnhs_zdl/">Instagram</a> to keep track of our team's progress!</p>
+        <ul class="icons">
+            <li><a href="https://www.instagram.com/dnhs_zdl/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+        </ul>
+    </footer>
+
+    		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+
 </body>
 
 </html>
