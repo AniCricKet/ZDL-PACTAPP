@@ -233,244 +233,6 @@
 							
 								<button id="articleLinkButton" onclick="redirectToArticle()">I want to decrease my emissions</button>
 							</div>
-						</section>
-						<script>
-										class Calculations
-					{
-						//carID is 0 for small, 1 for medium, 2 for large, and 3 for hybrid.
-						constructor(milespermonth, carid, airtravelmiles, homeenergy)
-						{
-							this.milesPerMonth = milespermonth;
-							this.carID = carid;
-							this.airTravelMiles = airtravelmiles;
-							this.homeEnergy = homeenergy;
-						}
-						calculateCarbonEmissions()
-						{
-							var total = 0;
-							switch(this.carID)
-							{
-								case 0:
-									total += this.milesPerMonth*0.32990;
-									break;
-								case 1:
-									total += this.milesPerMonth*0.40935;
-									break;
-								case 2:
-									total += this.milesPerMonth*0.56934;
-									break;
-								case 3:
-									total += this.milesPerMonth*0.22767;
-									break;
-								default:
-									alert("ID IS INCORRECT!!!!!!");
-									throw "CarID incorrect.";
-							}
-							total += this.airTravelMiles*0.56964;
-							total += this.homeEnergy*0.38782148;
-							return total;
-						}
-						calculateDegreeChange(carbonEmissions)
-						{
-							return carbonEmissions*(1.5576324*Math.pow(10, -13));
-						}
-					} 
-						</script>
-						<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-					
-						<script>
-							const form = document.getElementById('carbonCalculatorForm');
-							const calculateButton = document.getElementById('calculateButton');
-							const carbonEmissionsElement = document.getElementById('carbonEmissions');
-							const degreeChangeElement = document.getElementById('degreeChange');
-						
-							const carTypeToID = {
-								small: 0,
-								medium: 1,
-								large: 2,
-								hybrid: 3
-							};
-						
-							// Chart.js chart contexts
-							const temperatureChartCtx = document.getElementById('temperatureChart').getContext('2d');
-							const carbonEmissionsChartCtx = document.getElementById('carbonEmissionsChart').getContext('2d');
-						
-							// Load chart data from local storage
-							const chartData = JSON.parse(localStorage.getItem('carbonChartData')) || { temperature: { labels: [], data: [] }, carbonEmissions: { labels: [], data: [] } };
-						
-							// Initialize Chart.js charts with loaded data
-							const temperatureChart = new Chart(temperatureChartCtx, {
-								type: 'line',
-								data: {
-									labels: chartData.temperature.labels,
-									datasets: [{
-										label: 'Change in Temperature',
-										data: chartData.temperature.data,
-										fill: false,
-										borderColor: 'rgba(75, 192, 192, 1)',
-										tension: 0.1
-									}]
-								}
-							});
-						
-							const carbonEmissionsChart = new Chart(carbonEmissionsChartCtx, {
-								type: 'line',
-								data: {
-									labels: chartData.carbonEmissions.labels,
-									datasets: [{
-										label: 'Change in Carbon Emissions',
-										data: chartData.carbonEmissions.data,
-										fill: false,
-										borderColor: 'rgba(255, 99, 132, 1)',
-										tension: 0.1
-									}]
-								}
-							});
-						
-							calculateButton.addEventListener('click', () => {
-								const milesPerMonth = parseFloat(document.getElementById('milesPerMonth').value);
-								const carType = document.getElementById('carType').value; // Get the car type as a string
-								const airTravelMiles = parseFloat(document.getElementById('airTravelMiles').value);
-								const homeEnergy = parseFloat(document.getElementById('homeEnergy').value);
-						
-								// Map the car type to the numeric ID
-								const carID = carTypeToID[carType];
-						
-								const calculator = new Calculations(milesPerMonth, carID, airTravelMiles, homeEnergy);
-						
-								const carbonEmissions = calculator.calculateCarbonEmissions();
-								const degreeChange = calculator.calculateDegreeChange(carbonEmissions);
-						
-								carbonEmissionsElement.textContent = carbonEmissions;
-								degreeChangeElement.textContent = degreeChange;
-						
-								// Add data to the charts
-								addDataToCharts(temperatureChart, carbonEmissionsChart, degreeChange*Math.pow(10,8), carbonEmissions);
-						
-								// Store data in local storage
-								storeData(temperatureChart, carbonEmissionsChart);
-							});
-						
-							// Function to add data to the charts
-							function addDataToCharts(temperatureChart, carbonEmissionsChart, temperatureChange, carbonEmissions) {
-								const time = new Date().toLocaleTimeString();
-					
-								// Add data points to the charts
-								temperatureChart.data.labels.push(time);
-								temperatureChart.data.datasets[0].data.push(temperatureChange);
-					
-								carbonEmissionsChart.data.labels.push(time);
-								carbonEmissionsChart.data.datasets[0].data.push(carbonEmissions);
-					
-								// Limit the number of data points displayed (e.g., display the last 10 data points)
-								if (temperatureChart.data.labels.length > 100) {
-									temperatureChart.data.labels.shift();
-									temperatureChart.data.datasets[0].data.shift();
-								}
-					
-								if (carbonEmissionsChart.data.labels.length > 100) {
-									carbonEmissionsChart.data.labels.shift();
-									carbonEmissionsChart.data.datasets[0].data.shift();
-								}
-					
-								// Update charts
-								temperatureChart.update();
-								carbonEmissionsChart.update();
-							}
-						
-							// Function to store data in local storage
-							function storeData(temperatureChart, carbonEmissionsChart) {
-								const dataToStore = {
-									temperature: {
-										labels: temperatureChart.data.labels,
-										data: temperatureChart.data.datasets[0].data
-									},
-									carbonEmissions: {
-										labels: carbonEmissionsChart.data.labels,
-										data: carbonEmissionsChart.data.datasets[0].data
-									}
-								};
-						
-								localStorage.setItem('carbonChartData', JSON.stringify(dataToStore));
-							}
-							function openHelpModal(type) {
-								const modal = document.createElement('div');
-								modal.className = 'modal';
-								
-								let imageSrc, title;
-								
-								if (type === 'miles') {
-									imageSrc = '/img/app_images/carmiles.png';
-									title = 'Average Car Miles Per Month by Age';
-								} else if (type === 'energy') {
-									imageSrc = '/img/app_images/readsdge.jpg';
-									title = 'How to Read Your SDGE Bill';
-								} else if (type === 'airTravel') {
-									imageSrc = 'https://www.mapdevelopers.com/mileage_calculator.php';
-									title = 'Air Travel Miles Calculator';
-								} else {
-									alert('Invalid help type');
-									return;
-								}
-								
-								modal.innerHTML = `
-									<div class="modal-content">
-										<span class="close" onclick="closeHelpModal()">&times;</span>
-										<h3>${title}</h3>
-										${type === 'airTravel' ? `<iframe src="${imageSrc}" style="width:100%; height: 80vh; border: none;"></iframe>` : `<img src="${imageSrc}" alt="Help Image" style="max-width: 100%; max-height: 80vh; display: block; margin: 0 auto;">`}
-									</div>
-								`;
-								
-								document.body.appendChild(modal);
-							}
-							
-							
-					
-							function closeHelpModal() {
-								const modal = document.querySelector('.modal');
-								if (modal) {
-									modal.remove();
-								}
-							}
-							function redirectToArticle() {
-								const percentageDecrease = parseFloat(document.getElementById('percentageDecrease').value);
-						
-								if (isNaN(percentageDecrease) || percentageDecrease < 0) {
-									alert("Please enter a valid percentage.");
-									return;
-								}
-						
-								// Replace the link below with the actual link to your article.
-								const articleLink = 'https://zdldnhs.wixsite.com/pact/team-1';
-								
-								// Open the article link in a new tab.
-								window.open(articleLink, '_blank');
-							}
-							
-							const punnySentences = [
-								"Don't be a fossil fool! 🦕",
-								"Be-leaf in a cleaner planet! 🌿",
-								"I watts you to know, together we can illuminate a brighter, energy-efficient future! 💡",
-								"Take small steps to leave a big impact 👣",
-								"Small carbon footprint = big impact 👣🌎",
-								"Think green and keep our planet clean! 🌿",
-								"Eco-friendly driving is wheely important! 🚗",
-								"Switch to LEDs... it's a bright idea for a sustainable tomorrow! 💡",
-								"Why did the eco-friendly person bring a ladder? To reduce their carbon footprint step by step! 🌿👣",
-								"Fuel your day with positivity, not greenhouse gas emissions! ⛽😊",
-								"Reduce your carbon footprint, not your enthusiasm! 💪",
-					];
-					
-					
-							function displayRandomPunnySentence() {
-								const punnySentenceContainer = document.getElementById('punnySentence');
-								const randomIndex = Math.floor(Math.random() * punnySentences.length);
-								punnySentenceContainer.textContent = punnySentences[randomIndex];
-							}
-							addDataToCharts(temperatureChart, carbonEmissionsChart, degreeChange * Math.pow(10, 8), carbonEmissions);
-							displayRandomPunnySentence();
-						</script>
-						</section>
 					</article>
 					
 			<!-- Footer -->
@@ -481,9 +243,244 @@
 					<li><a href="https://www.instagram.com/dnhs_zdl/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 				</ul>
 			</footer>
-
 	</div>
 
+
+	<script>
+		class Calculations{
+		//carID is 0 for small, 1 for medium, 2 for large, and 3 for hybrid.
+		constructor(milespermonth, carid, airtravelmiles, homeenergy)
+		{
+			this.milesPerMonth = milespermonth;
+			this.carID = carid;
+			this.airTravelMiles = airtravelmiles;
+			this.homeEnergy = homeenergy;
+		}
+		calculateCarbonEmissions()
+		{
+			var total = 0;
+			switch(this.carID)
+			{
+				case 0:
+					total += this.milesPerMonth*0.32990;
+					break;
+				case 1:
+					total += this.milesPerMonth*0.40935;
+					break;
+				case 2:
+					total += this.milesPerMonth*0.56934;
+					break;
+				case 3:
+					total += this.milesPerMonth*0.22767;
+					break;
+				default:
+					alert("ID IS INCORRECT!!!!!!");
+					throw "CarID incorrect.";
+			}
+			total += this.airTravelMiles*0.56964;
+			total += this.homeEnergy*0.38782148;
+			return total;
+		}
+		calculateDegreeChange(carbonEmissions)
+		{
+			return carbonEmissions*(1.5576324*Math.pow(10, -13));
+		}
+	} 
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
+		<script>
+			const form = document.getElementById('carbonCalculatorForm');
+			const calculateButton = document.getElementById('calculateButton');
+			const carbonEmissionsElement = document.getElementById('carbonEmissions');
+			const degreeChangeElement = document.getElementById('degreeChange');
+		
+			const carTypeToID = {
+				small: 0,
+				medium: 1,
+				large: 2,
+				hybrid: 3
+			};
+		
+			// Chart.js chart contexts
+			const temperatureChartCtx = document.getElementById('temperatureChart').getContext('2d');
+			const carbonEmissionsChartCtx = document.getElementById('carbonEmissionsChart').getContext('2d');
+		
+			// Load chart data from local storage
+			const chartData = JSON.parse(localStorage.getItem('carbonChartData')) || { temperature: { labels: [], data: [] }, carbonEmissions: { labels: [], data: [] } };
+		
+			// Initialize Chart.js charts with loaded data
+			const temperatureChart = new Chart(temperatureChartCtx, {
+				type: 'line',
+				data: {
+					labels: chartData.temperature.labels,
+					datasets: [{
+						label: 'Change in Temperature',
+						data: chartData.temperature.data,
+						fill: false,
+						borderColor: 'rgba(75, 192, 192, 1)',
+						tension: 0.1
+					}]
+				}
+			});
+		
+			const carbonEmissionsChart = new Chart(carbonEmissionsChartCtx, {
+				type: 'line',
+				data: {
+					labels: chartData.carbonEmissions.labels,
+					datasets: [{
+						label: 'Change in Carbon Emissions',
+						data: chartData.carbonEmissions.data,
+						fill: false,
+						borderColor: 'rgba(255, 99, 132, 1)',
+						tension: 0.1
+					}]
+				}
+			});
+		
+			calculateButton.addEventListener('click', () => {
+				const milesPerMonth = parseFloat(document.getElementById('milesPerMonth').value);
+				const carType = document.getElementById('carType').value; // Get the car type as a string
+				const airTravelMiles = parseFloat(document.getElementById('airTravelMiles').value);
+				const homeEnergy = parseFloat(document.getElementById('homeEnergy').value);
+		
+				// Map the car type to the numeric ID
+				const carID = carTypeToID[carType];
+		
+				const calculator = new Calculations(milesPerMonth, carID, airTravelMiles, homeEnergy);
+		
+				const carbonEmissions = calculator.calculateCarbonEmissions();
+				const degreeChange = calculator.calculateDegreeChange(carbonEmissions);
+		
+				carbonEmissionsElement.textContent = carbonEmissions;
+				degreeChangeElement.textContent = degreeChange;
+		
+				// Add data to the charts
+				addDataToCharts(temperatureChart, carbonEmissionsChart, degreeChange*Math.pow(10,8), carbonEmissions);
+		
+				// Store data in local storage
+				storeData(temperatureChart, carbonEmissionsChart);
+			});
+		
+			// Function to add data to the charts
+			function addDataToCharts(temperatureChart, carbonEmissionsChart, temperatureChange, carbonEmissions) {
+				const time = new Date().toLocaleTimeString();
+	
+				// Add data points to the charts
+				temperatureChart.data.labels.push(time);
+				temperatureChart.data.datasets[0].data.push(temperatureChange);
+	
+				carbonEmissionsChart.data.labels.push(time);
+				carbonEmissionsChart.data.datasets[0].data.push(carbonEmissions);
+	
+				// Limit the number of data points displayed (e.g., display the last 10 data points)
+				if (temperatureChart.data.labels.length > 100) {
+					temperatureChart.data.labels.shift();
+					temperatureChart.data.datasets[0].data.shift();
+				}
+	
+				if (carbonEmissionsChart.data.labels.length > 100) {
+					carbonEmissionsChart.data.labels.shift();
+					carbonEmissionsChart.data.datasets[0].data.shift();
+				}
+	
+				// Update charts
+				temperatureChart.update();
+				carbonEmissionsChart.update();
+			}
+		
+			// Function to store data in local storage
+			function storeData(temperatureChart, carbonEmissionsChart) {
+				const dataToStore = {
+					temperature: {
+						labels: temperatureChart.data.labels,
+						data: temperatureChart.data.datasets[0].data
+					},
+					carbonEmissions: {
+						labels: carbonEmissionsChart.data.labels,
+						data: carbonEmissionsChart.data.datasets[0].data
+					}
+				};
+		
+				localStorage.setItem('carbonChartData', JSON.stringify(dataToStore));
+			}
+			function openHelpModal(type) {
+				const modal = document.createElement('div');
+				modal.className = 'modal';
+				
+				let imageSrc, title;
+				
+				if (type === 'miles') {
+					imageSrc = '/img/app_images/carmiles.png';
+					title = 'Average Car Miles Per Month by Age';
+				} else if (type === 'energy') {
+					imageSrc = '/img/app_images/readsdge.jpg';
+					title = 'How to Read Your SDGE Bill';
+				} else if (type === 'airTravel') {
+					imageSrc = 'https://www.mapdevelopers.com/mileage_calculator.php';
+					title = 'Air Travel Miles Calculator';
+				} else {
+					alert('Invalid help type');
+					return;
+				}
+				
+				modal.innerHTML = `
+					<div class="modal-content">
+						<span class="close" onclick="closeHelpModal()">&times;</span>
+						<h3>${title}</h3>
+						${type === 'airTravel' ? `<iframe src="${imageSrc}" style="width:100%; height: 80vh; border: none;"></iframe>` : `<img src="${imageSrc}" alt="Help Image" style="max-width: 100%; max-height: 80vh; display: block; margin: 0 auto;">`}
+					</div>
+				`;
+				
+				document.body.appendChild(modal);
+			}
+			
+			
+	
+			function closeHelpModal() {
+				const modal = document.querySelector('.modal');
+				if (modal) {
+					modal.remove();
+				}
+			}
+			function redirectToArticle() {
+				const percentageDecrease = parseFloat(document.getElementById('percentageDecrease').value);
+		
+				if (isNaN(percentageDecrease) || percentageDecrease < 0) {
+					alert("Please enter a valid percentage.");
+					return;
+				}
+		
+				// Replace the link below with the actual link to your article.
+				const articleLink = 'https://zdldnhs.wixsite.com/pact/team-1';
+				
+				// Open the article link in a new tab.
+				window.open(articleLink, '_blank');
+			}
+			
+			const punnySentences = [
+				"Don't be a fossil fool! 🦕",
+				"Be-leaf in a cleaner planet! 🌿",
+				"I watts you to know, together we can illuminate a brighter, energy-efficient future! 💡",
+				"Take small steps to leave a big impact 👣",
+				"Small carbon footprint = big impact 👣🌎",
+				"Think green and keep our planet clean! 🌿",
+				"Eco-friendly driving is wheely important! 🚗",
+				"Switch to LEDs... it's a bright idea for a sustainable tomorrow! 💡",
+				"Why did the eco-friendly person bring a ladder? To reduce their carbon footprint step by step! 🌿👣",
+				"Fuel your day with positivity, not greenhouse gas emissions! ⛽😊",
+				"Reduce your carbon footprint, not your enthusiasm! 💪",
+	];
+	
+	
+			function displayRandomPunnySentence() {
+				const punnySentenceContainer = document.getElementById('punnySentence');
+				const randomIndex = Math.floor(Math.random() * punnySentences.length);
+				punnySentenceContainer.textContent = punnySentences[randomIndex];
+			}
+			addDataToCharts(temperatureChart, carbonEmissionsChart, degreeChange * Math.pow(10, 8), carbonEmissions);
+			displayRandomPunnySentence();
+		</script>
 <!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
