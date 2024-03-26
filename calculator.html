@@ -199,13 +199,13 @@
 					
 					
 						<label for="airTravelMiles">
-							Air Travel Miles:
+							Air Travel Miles Per Year:
 							<span class="question-mark" onclick="openHelpModal('airTravel')">&#63;</span>
 						</label>
 						<input type="number" id="airTravelMiles" placeholder="Enter air travel miles">
 						
 					
-								<label for="homeEnergy">Home Energy (kWh):
+								<label for="homeEnergy">Home Energy Used Per Month(kWh):
 									<span class="question-mark" onclick="openHelpModal('energy')">&#63;</span>
 								</label>
 								<input type="number" id="homeEnergy" placeholder="Enter home energy consumption (kWh)">
@@ -324,8 +324,21 @@
 						borderColor: 'rgba(75, 192, 192, 1)',
 						tension: 0.1
 					}]
+				},
+				options: {
+					scales: {
+						y: {
+							min: 0, // Set the minimum value for the y-axis
+							max: 3e-10, // Set the maximum value for the y-axis
+							ticks: {
+								callback: function(value, index, values) {
+									return value.toExponential(); // Format y-axis labels in scientific notation
+								}
+							}
+						}
+					}
 				}
-			});
+			});			
 		
 			const carbonEmissionsChart = new Chart(carbonEmissionsChartCtx, {
 				type: 'line',
