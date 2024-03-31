@@ -1,0 +1,510 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Greenhouse Gas Emissions Calculator</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<style>
+			body {
+				margin: 0;
+				padding: 5px;
+			}
+			
+			.container {
+				margin: 0 auto;
+				padding: 10px;
+				border-radius: 10px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			}
+			
+			.logo {
+				text-align: center;
+			}
+			
+			.logo img {
+				max-width: 100%;
+				height: auto;
+			}
+	
+			h1 {
+				text-align: center;
+				margin-bottom: 20px;
+			}
+			
+			.form {
+				margin-top: 20px;
+			}
+			
+			label {
+				display: block;
+				font-weight: bold;
+				margin-top: 10px;
+			}
+			
+			input, select {
+				width: 100%;
+				padding: 12px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				margin-top: 5px;
+			}
+			
+			button {
+				display: block;
+				margin: 20px auto;
+				background-color: #007BFF;
+				color: #fff;
+				border: none;
+				border-radius: 5px;
+				padding: 12px 24px;
+				cursor: pointer;
+				font-size: 16px;
+				transition: background-color 0.3s;
+			}
+			
+			button:hover {
+				background-color: #0056b3; /* Darker blue on hover */
+			}
+			
+			#results {
+				text-align: center;
+				margin: 20px 0;
+				padding: 10px;
+				border-radius: 5px;
+				box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+			}
+			
+			#results p {
+				margin: 10px 0;
+				font-size: 18px;
+			}
+			.graph-container h2 {
+				text-align: center;
+				color: #007BFF; /* Dark blue section title color */
+				margin: 20px 0;
+			}
+			.canvas-container {
+				margin-top: 20px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			}
+			/* Adjust the canvas size */
+			canvas {
+				width: 100%;
+				height: 300px;
+			}        
+			.modal {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.7);
+				z-index: 1;
+			}
+	
+			.modal-content {
+				position: relative;
+				padding: 20px;
+				background-color: #000000;
+				max-width: 80%;
+				max-height: 80%;
+				overflow: auto;
+				border-radius: 10px;
+			}
+	
+			.close {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				cursor: pointer;
+			}
+			
+			.punny-sentence-container {
+				text-align: center;
+				margin-top: 20px;
+				padding: 10px;
+				border-radius: 5px;
+				box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+			}
+			input[type="number"] {
+    			color: black;
+			}
+
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+				<header id="header" class="alt">
+					<h1><a href="index.html">Zero Degree Lab</a></h1>
+					<nav id="nav">
+						<ul>
+							<li class="special">
+								<a href="#menu" class="menuToggle"><span>Menu</span></a>
+								<div id="menu">
+									<ul>
+										<li><a href="index.html">Home</a></li>
+										<li><a href="calculator.html">Calculator</a></li>
+										<li><a href="about.html">About</a></li>
+										<li><a href="health.html">Health Report</a></li>
+										<li><a href="animations.html">Climate Change Animations</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</nav>
+				</header>
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Greenhouse Gas Emissions Calculator</h2>
+							<p>Use our calculator to measure your greenhouse gas emissions and set goals to reduce it</p>
+						</header>
+						<section class="wrapper style5">
+							<div class="logo" style="text-align: center;">
+								<h2>Del Norte High School</h2>
+								<img src="/img/app_images/zdl-logo-removebg.png" alt="Zero Degree Lab Logo" width="300" height="300">
+						</div>
+							<p>Welcome to the official website of Del Norte High School's Zero Degree Lab! We are a group of high school students determined to do our part in stopping climate change. We believe that everyone has the potential to be a force for change in our environment. Over the last few years, we’ve partnered with Stanford’s Zero Degree Collaboratory to create an app that helps track their impact on the environment, and motivate them to decrease their carbon footprint. </p>
+							<form class="form" id="carbonCalculatorForm">
+								<label for="carType">Car Type:</label>
+						<select id="carType">
+							<option value="small">Small (e.g., Sedan)</option>
+							<option value="medium">Medium (e.g., SUV)</option>
+							<option value="large">Large (e.g., Pickup Truck)</option>
+							<option value="hybrid">Hybrid (e.g., Toyota Prius)</option>
+						</select>
+					
+						<label for="milesPerMonth">Car Miles Per Month: 
+							<span class="question-mark" onclick="openHelpModal('miles')">&#63;</span>
+						</label>
+						<input type="number" id="milesPerMonth" placeholder="Enter miles per month">
+					
+					
+						<label for="airTravelMiles">
+							Air Travel Miles Per Year:
+							<span class="question-mark" onclick="openHelpModal('airTravel')">&#63;</span>
+						</label>
+						<input type="number" id="airTravelMiles" placeholder="Enter air travel miles">
+						
+					
+								<label for="homeEnergy">Home Energy Used Per Month(kWh):
+									<span class="question-mark" onclick="openHelpModal('energy')">&#63;</span>
+								</label>
+								<input type="number" id="homeEnergy" placeholder="Enter home energy consumption (kWh)">
+							</form>
+							<button id="calculateButton">Calculate</button>
+					
+							<div id="results">
+								<p>Greenhouse Gas Emissions: <span id="carbonEmissions">--</span> KG</p>
+								<p>Degree Change: <span id="degreeChange">--</span> Â°F</p>
+							</div>
+							<div class="punny-sentence-container" id="punnySentenceContainer">
+								<p id="punnySentence"></p>
+						</div>
+							<!-- Graphs for Change in Temperature vs Time and Change in Carbon Emissions vs Time -->
+							<div class="graph-container">
+								<h2>Change in Temperature vs Time</h2>
+								<canvas id="temperatureChart" width="400" height="200"></canvas>
+							</div>
+					
+							<div class="graph-container">
+								<h2>Change in Greenhouse Gas Emissions vs Time</h2>
+								<canvas id="carbonEmissionsChart" width="400" height="200"></canvas>
+							</div>
+					
+							<div class="percentage-decrease">
+								<label for="percentageDecrease">Percentage Decrease Goal:</label>
+								<input type="number" id="percentageDecrease" placeholder="Enter how much you want to decrease by (as a percentage)">
+							
+								<button id="articleLinkButton" onclick="redirectToArticle()">I want to decrease my emissions</button>
+							</div>
+					</article>
+					
+			<!-- Footer -->
+			<footer id="footer">
+				<h3>Join the Movement: Be a Climate Change Hero As A High Schooler Today!</h3>
+				<p> Follow us on <a href="https://www.instagram.com/dnhs_zdl/">Instagram</a> to keep track of our team's progress!</p>
+				<ul class="icons">
+					<li><a href="https://www.instagram.com/dnhs_zdl/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+				</ul>
+			</footer>
+	</div>
+
+
+	<script>
+		class Calculations{
+		//carID is 0 for small, 1 for medium, 2 for large, and 3 for hybrid.
+		constructor(milespermonth, carid, airtravelmiles, homeenergy)
+		{
+			this.milesPerMonth = milespermonth;
+			this.carID = carid;
+			this.airTravelMiles = airtravelmiles;
+			this.homeEnergy = homeenergy;
+		}
+		calculateCarbonEmissions()
+		{
+			var total = 0;
+			switch(this.carID)
+			{
+				case 0:
+					total += this.milesPerMonth*0.32990;
+					break;
+				case 1:
+					total += this.milesPerMonth*0.40935;
+					break;
+				case 2:
+					total += this.milesPerMonth*0.56934;
+					break;
+				case 3:
+					total += this.milesPerMonth*0.22767;
+					break;
+				default:
+					alert("ID IS INCORRECT!!!!!!");
+					throw "CarID incorrect.";
+			}
+			total += this.airTravelMiles*0.56964;
+			total += this.homeEnergy*0.38782148;
+			return total;
+		}
+		calculateDegreeChange(carbonEmissions)
+		{
+			return carbonEmissions*(1.5576324*Math.pow(10, -13));
+		}
+	} 
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
+		<script>
+			const form = document.getElementById('carbonCalculatorForm');
+			const calculateButton = document.getElementById('calculateButton');
+			const carbonEmissionsElement = document.getElementById('carbonEmissions');
+			const degreeChangeElement = document.getElementById('degreeChange');
+		
+			const carTypeToID = {
+				small: 0,
+				medium: 1,
+				large: 2,
+				hybrid: 3
+			};
+		
+			// Chart.js chart contexts
+			const temperatureChartCtx = document.getElementById('temperatureChart').getContext('2d');
+			const carbonEmissionsChartCtx = document.getElementById('carbonEmissionsChart').getContext('2d');
+		
+			// Load chart data from local storage
+			const chartData = JSON.parse(localStorage.getItem('carbonChartData')) || { temperature: { labels: [], data: [] }, carbonEmissions: { labels: [], data: [] } };
+		
+			// Initialize Chart.js charts with loaded data
+			const temperatureChart = new Chart(temperatureChartCtx, {
+				type: 'line',
+				data: {
+					labels: chartData.temperature.labels,
+					datasets: [{
+						label: 'Change in Temperature',
+						data: chartData.temperature.data,
+						fill: false,
+						borderColor: 'rgba(75, 192, 192, 1)',
+						tension: 0.1
+					}]
+				},
+				options: {
+					scales: {
+						y: {
+							min: 0, // Set the minimum value for the y-axis
+							max: 3e-10, // Set the maximum value for the y-axis
+							ticks: {
+								callback: function(value, index, values) {
+									return value.toExponential(); // Format y-axis labels in scientific notation
+								}
+							}
+						}
+					}
+				}
+			});			
+		
+			const carbonEmissionsChart = new Chart(carbonEmissionsChartCtx, {
+				type: 'line',
+				data: {
+					labels: chartData.carbonEmissions.labels,
+					datasets: [{
+						label: 'Change in Carbon Emissions',
+						data: chartData.carbonEmissions.data,
+						fill: false,
+						borderColor: 'rgba(255, 99, 132, 1)',
+						tension: 0.1
+					}]
+				}
+			});
+		
+			calculateButton.addEventListener('click', () => {
+				const milesPerMonth = parseFloat(document.getElementById('milesPerMonth').value);
+				const carType = document.getElementById('carType').value; // Get the car type as a string
+				const airTravelMiles = parseFloat(document.getElementById('airTravelMiles').value);
+				const homeEnergy = parseFloat(document.getElementById('homeEnergy').value);
+		
+				// Map the car type to the numeric ID
+				const carID = carTypeToID[carType];
+		
+				const calculator = new Calculations(milesPerMonth, carID, airTravelMiles, homeEnergy);
+		
+				const carbonEmissions = calculator.calculateCarbonEmissions();
+				const degreeChange = calculator.calculateDegreeChange(carbonEmissions);
+		
+				carbonEmissionsElement.textContent = carbonEmissions;
+				degreeChangeElement.textContent = degreeChange;
+		
+				// Add data to the charts
+				addDataToCharts(temperatureChart, carbonEmissionsChart, degreeChange*Math.pow(10,8), carbonEmissions);
+		
+				// Store data in local storage
+				storeData(temperatureChart, carbonEmissionsChart);
+			});
+		
+			// Function to add data to the charts
+			function addDataToCharts(temperatureChart, carbonEmissionsChart, temperatureChange, carbonEmissions) {
+				const time = new Date().toLocaleTimeString();
+	
+				// Add data points to the charts
+				temperatureChart.data.labels.push(time);
+				temperatureChart.data.datasets[0].data.push(temperatureChange);
+	
+				carbonEmissionsChart.data.labels.push(time);
+				carbonEmissionsChart.data.datasets[0].data.push(carbonEmissions);
+	
+				// Limit the number of data points displayed (e.g., display the last 10 data points)
+				if (temperatureChart.data.labels.length > 100) {
+					temperatureChart.data.labels.shift();
+					temperatureChart.data.datasets[0].data.shift();
+				}
+	
+				if (carbonEmissionsChart.data.labels.length > 100) {
+					carbonEmissionsChart.data.labels.shift();
+					carbonEmissionsChart.data.datasets[0].data.shift();
+				}
+	
+				// Update charts
+				temperatureChart.update();
+				carbonEmissionsChart.update();
+			}
+		
+			// Function to store data in local storage
+			function storeData(temperatureChart, carbonEmissionsChart) {
+				const dataToStore = {
+					temperature: {
+						labels: temperatureChart.data.labels,
+						data: temperatureChart.data.datasets[0].data
+					},
+					carbonEmissions: {
+						labels: carbonEmissionsChart.data.labels,
+						data: carbonEmissionsChart.data.datasets[0].data
+					}
+				};
+		
+				localStorage.setItem('carbonChartData', JSON.stringify(dataToStore));
+			}
+			function openHelpModal(type) {
+				const modal = document.createElement('div');
+				modal.className = 'modal';
+				
+				let imageSrc, title;
+				
+				if (type === 'miles') {
+					imageSrc = '/img/app_images/carmiles.png';
+					title = 'Average Car Miles Per Month by Age';
+				} else if (type === 'energy') {
+					imageSrc = '/img/app_images/readsdge.jpg';
+					title = 'How to Read Your SDGE Bill';
+				} else if (type === 'airTravel') {
+					imageSrc = 'https://www.mapdevelopers.com/mileage_calculator.php';
+					title = 'Air Travel Miles Calculator';
+				} else {
+					alert('Invalid help type');
+					return;
+				}
+				
+				modal.innerHTML = `
+					<div class="modal-content">
+						<span class="close" onclick="closeHelpModal()">&times;</span>
+						<h3>${title}</h3>
+						${type === 'airTravel' ? `<iframe src="${imageSrc}" style="width:100%; height: 80vh; border: none;"></iframe>` : `<img src="${imageSrc}" alt="Help Image" style="max-width: 100%; max-height: 80vh; display: block; margin: 0 auto;">`}
+					</div>
+				`;
+				
+				document.body.appendChild(modal);
+			}
+			
+			
+	
+			function closeHelpModal() {
+				const modal = document.querySelector('.modal');
+				if (modal) {
+					modal.remove();
+				}
+			}
+			function redirectToArticle() {
+				const percentageDecrease = parseFloat(document.getElementById('percentageDecrease').value);
+		
+				if (isNaN(percentageDecrease) || percentageDecrease < 0) {
+					alert("Please enter a valid percentage.");
+					return;
+				}
+		
+				// Replace the link below with the actual link to your article.
+				const articleLink = '/index.html#one';
+				
+				// Open the article link in a new tab.
+				window.open(articleLink, '_blank');
+			}
+			
+			const punnySentences = [
+				"Don't be a fossil fool! 🦕",
+				"Be-leaf in a cleaner planet! 🌿",
+				"I watts you to know, together we can illuminate a brighter, energy-efficient future! 💡",
+				"Take small steps to leave a big impact 👣",
+				"Small carbon footprint = big impact 👣🌎",
+				"Think green and keep our planet clean! 🌿",
+				"Eco-friendly driving is wheely important! 🚗",
+				"Switch to LEDs... it's a bright idea for a sustainable tomorrow! 💡",
+				"Why did the eco-friendly person bring a ladder? To reduce their carbon footprint step by step! 🌿👣",
+				"Fuel your day with positivity, not greenhouse gas emissions! ⛽😊",
+				"Reduce your carbon footprint, not your enthusiasm! 💪",
+	];
+	
+	
+			function displayRandomPunnySentence() {
+				const punnySentenceContainer = document.getElementById('punnySentence');
+				const randomIndex = Math.floor(Math.random() * punnySentences.length);
+				punnySentenceContainer.textContent = punnySentences[randomIndex];
+			}
+			addDataToCharts(temperatureChart, carbonEmissionsChart, degreeChange * Math.pow(10, 8), carbonEmissions);
+			displayRandomPunnySentence();
+		</script>
+<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+</html>
