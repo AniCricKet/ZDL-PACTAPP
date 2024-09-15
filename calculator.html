@@ -225,7 +225,7 @@
 					
 							<div class="graph-container">
 								<h2>Change in Greenhouse Gas Emissions vs Time</h2>
-								<canvas id="carbonEmissionsChart" width="400" height="200"></canvas>
+								<canvas id="myCanvas" width="400" height="400"></canvas>
 							</div>
 					
 							<div class="percentage-decrease">
@@ -356,28 +356,40 @@
 			});
 		
 			calculateButton.addEventListener('click', () => {
-				const milesPerMonth = parseFloat(document.getElementById('milesPerMonth').value);
+				const milesPerMonth = parseFloat(document.getElementById('milesPerMonth').value) || 0;
 				const carType = document.getElementById('carType').value; // Get the car type as a string
-				const airTravelMiles = parseFloat(document.getElementById('airTravelMiles').value);
-				const homeEnergy = parseFloat(document.getElementById('homeEnergy').value);
-		
+				const airTravelMiles = parseFloat(document.getElementById('airTravelMiles').value) || 0;
+				const homeEnergy = parseFloat(document.getElementById('homeEnergy').value) || 0;
+			  
 				// Map the car type to the numeric ID
 				const carID = carTypeToID[carType];
-		
+			  
+				// Ensure all values are valid
+				if (!milesPerMonth || !airTravelMiles || !homeEnergy) {
+				  alert("Please enter valid inputs for all fields.");
+				  return;
+				}
+			  
+				// Debug log for checking values
+				console.log(`Miles per month: ${milesPerMonth}, Car Type: ${carType}, Air Travel: ${airTravelMiles}, Home Energy: ${homeEnergy}`);
+			  
 				const calculator = new Calculations(milesPerMonth, carID, airTravelMiles, homeEnergy);
-		
+			  
 				const carbonEmissions = calculator.calculateCarbonEmissions();
 				const degreeChange = calculator.calculateDegreeChange(carbonEmissions);
-		
+			  
+				// Log calculated results for debugging
+				console.log(`Carbon Emissions: ${carbonEmissions}, Degree Change: ${degreeChange}`);
+			  
 				carbonEmissionsElement.textContent = carbonEmissions;
 				degreeChangeElement.textContent = degreeChange;
-		
+			  
 				// Add data to the charts
 				addDataToCharts(temperatureChart, carbonEmissionsChart, degreeChange*Math.pow(10,8), carbonEmissions);
-		
+			  
 				// Store data in local storage
 				storeData(temperatureChart, carbonEmissionsChart);
-			});
+			  });			  
 		
 			// Function to add data to the charts
 			function addDataToCharts(temperatureChart, carbonEmissionsChart, temperatureChange, carbonEmissions) {
